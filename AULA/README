@@ -1,0 +1,20 @@
+P5I430VX/250DM Explorer II AWARD P&P BIOS V3.5S note. 
+This BIOS can only used on SPEEDEASY mainboard of Explorer II.
+Add the HARDDISK DELAY setting, fix some bugs. 
+
+How to use FLASH utility:
+1. Press DEL to enter BIOS SETUP, set internal and external cache "Disabled".
+2. Please press F5 to bypass config.sys and autoexec.bat when booting to DOS.
+3. Run utility as follow:   
+   A:> FLASH VXDM35S.BIN  <Enter>
+4. On the utility picture, a message "Do you want to save BIOS (Y/N)" will be 
+   displayed. If you want to save the BIOS on motherboard for referance, press 
+   'Y'; then, utility will ask you to give path and filename for backuping ROM
+   BIOS.
+5. Furthmore, a message "Are you sure to program (Y/N)" will appear. To upgrade 
+   BIOS, press 'Y'. After the utility finishes the upgrading procedure, turn 
+   power off and on or press RESET button to reboot system.
+
+Warning: 
+   Avoid power-off incidently in upgrading procedure, or system would fail 
+   to reboot!

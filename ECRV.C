@@ -1,0 +1,40 @@
+#include<stdio.h>
+void main()
+{
+ clrscr();
+ gotoxy(19,5);
+ printf("Û" );
+ gotoxy(20,5);
+ printf("Û");
+ gotoxy(21,5);
+ printf("Û");
+ gotoxy(22,5);
+ printf("Û");
+ gotoxy(23,6);
+ printf("Û");
+ gotoxy(24,6);
+ printf("Û");
+ gotoxy(24,10);
+ printf("Û");
+ gotoxy(23,11);
+ printf("Û");
+ gotoxy(24,11);
+ printf("Û");
+ gotoxy(21,12);
+ printf("Û");
+ gotoxy(22,12);
+ printf("Û");
+ gotoxy(21,13);
+ printf("Û");
+ gotoxy(21,14);
+ printf("Û");
+ gotoxy(22,14);
+ printf("Û");
+ gotoxy(23,14);
+ printf("Û");
+ gotoxy(23,15);
+ printf("Û");
+ gotoxy(24,15);
+ printf("Û");
+ getch();
+}

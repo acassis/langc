@@ -1,0 +1,103 @@
+settextjustify   Sets text justification for graphics mode
+ (Not available under MS-Windows.)
+
+ Syntax:
+   void far settextjustify(int horiz, int vert);
+
+ Prototype in:
+ graphics.h
+
+Affects text output with outtext, etc. Text is
+justified horizontally and vertically.
+
+Values for horiz and vert are listed here:
+
+  Param   Name          Val   How justified
+ อออออออุอออออออออออออุอออออุอออออออออออออออออ
+  horiz ณ LEFT_TEXT   ณ (0) ณ left          <
+        ณ CENTER_TEXT ณ (1) ณ > center text <
+        ณ RIGHT_TEXT  ณ (2) ณ >         right
+ ฤฤฤฤฤฤฤลฤฤฤฤฤฤฤฤฤฤฤฤฤลฤฤฤฤฤลฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤ
+  vert  ณ BOTTOM_TEXT ณ (0) ณ from bottom up
+        ณ CENTER_TEXT ณ (1) ณ center text
+        ณ TOP_TEXT    ณ (2) ณ from top down
+
+ See Also:
+  gettextsettings    outtext
+  graphresult        settextstyle
+
+ #include <graphics.h>
+ #include <stdlib.h>
+ #include <stdio.h>
+ #include <conio.h>
+
+ /* function prototype */
+ void xat(int x, int y);
+
+ /* horizontal text justification settings */
+ char *hjust[] = { "LEFT_TEXT",
+                   "CENTER_TEXT",
+                   "RIGHT_TEXT"
+                 };
+
+ /* vertical text justification settings */
+ char *vjust[] = { "LEFT_TEXT",
+                   "CENTER_TEXT",
+                   "RIGHT_TEXT"
+                 };
+
+ int main(void)
+ {
+    /* request auto detection */
+    int gdriver = DETECT, gmode, errorcode;
+    int midx, midy, hj, vj;
+    char msg[80];
+
+    /* initialize graphics and local variables */
+    initgraph(&gdriver, &gmode, "");
+
+    /* read result of initialization */
+    errorcode = graphresult();
+    if (errorcode != grOk)  /* an error occurred */
+    {
+       printf("Graphics error: %s\n", grapherrormsg(errorcode));
+       printf("Press any key to halt:");
+       getch();
+       exit(1); /* terminate with an error code */
+    }
+
+    midx = getmaxx() / 2;
+    midy = getmaxy() / 2;
+
+    /* loop through text justifications */
+    for (hj=LEFT_TEXT; hj<=RIGHT_TEXT; hj++)
+       for (vj=LEFT_TEXT; vj<=RIGHT_TEXT; vj++)
+       {
+          cleardevice();
+          /* set the text justification */
+          settextjustify(hj, vj);
+
+          /* create a message string */
+          sprintf(msg, "%s  %s", hjust[hj], vjust[vj]);
+
+          /* create cross hairs on the screen */
+          xat(midx, midy);
+
+          /* output the message */
+          outtextxy(midx, midy, msg);
+          getch();
+       }
+
+    /* clean up */
+    closegraph();
+    return 0;
+ }
+
+ /* draw an "x" at (x, y) */
+ void xat(int x, int y)
+ {
+   line(x-4, y, x+4, y);
+   line(x, y-4, x, y+4);
+ }
+
+

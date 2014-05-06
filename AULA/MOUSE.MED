@@ -1,0 +1,57 @@
+/* inicializa o mouse caso tenha mouse, retorna em bx o numero de botoes
+que o mouse tem.
+*/
+int mousepresente(void)
+{ in.x.ax=0;
+  int86(0x33,&in,&out);
+  if(out.x.ax!=0)  return (out.x.bx);// retorna o n§ de botoes do mouse
+  else  return(0);// retorna zero se nao houver mouse
+}
+/* liga o mouse para ser utilizado */
+void ligamouse(void)
+{ in.x.ax=1;       int86(0x33,&in,&out);   }
+/* desliga o mouse */
+void desligamouse(void)
+{ in.x.ax=2;    int86(0x33,&in,&out); }
+/* posicao do cursor do mouse cx=coluna e dx\linha*/
+void posicaomouse(void)
+{in.x.ax=3;   int86(0x33,&in,&out);
+ printf("  x=%3d y=%3d   ",out.x.cx,out.x.dx);   }
+/*  cria um botao usando a funcao bar  */
+void botao(int x1,int y1,int x2,int y2, char *texto,int cor,int flag)
+{/* 0 BLACK 1 BLUE 2 GREEN 3 CYAN 4 RED 5 MAGENTA 6 BROWN 7 LIGHTGRAY 8 DARKGRAY
+9 LIGHTBLUE 10 LIGHTGREEN 11 LIGHTCYAN 12 LIGHTRED 13 LIGHTMAGENTA 14 YELLOW 15 WHITE */
+if(!flag)
+{   setfillstyle(SOLID_FILL,7); bar(x1,y1,x2,y2);
+    setcolor(15);
+    line(x1,y1,x2,y1);
+    line(x1,y1,x1,y2);
+    line(x1-1,y1-1,x2,y1-1);
+    line(x1-1,y1-1,x1-1,y2);
+    setcolor(0);
+    line(x1,y2+1,x2,y2+1);
+    line(x2+1,y2,x2+1,y1);
+    setcolor(cor);  }
+  else{ setfillstyle(SOLID_FILL,8);bar(x1,y1,x2,y2);
+     setcolor(0);
+     line(x1,y1,x2,y1);
+     line(x1,y1,x1,y2);
+    line(x1-1,y1-1,x2,y1-1);
+    line(x1-1,y1-1,x1-1,y2);
+     setcolor(15);
+     line(x1,y2,x2,y2);
+     line(x2,y2,x2,y1);
+     line(x1,y2+1,x2,y2+1);
+     line(x2+1,y2,x2+1,y1);
+     delay(10);
+     setfillstyle(SOLID_FILL,7); bar(x1,y1,x2,y2);
+     setcolor(cor);}
+  setcolor(cor);
+  outtextxy(((x2-x1)-textwidth(texto))/2+x1,((y2-y1)-textheight(texto))/2+y1,texto);
+}
+/* testa se o usuario clicou dentro do botao   */
+int testa_botao(int x1,int y1, int x2, int y2)
+{
+ if(out.x.cx>=x1 && out.x.cx<=x2 && out.x.dx>=y1 && out.x.dx<=y2) return (1);
+ else return (0);
+}
